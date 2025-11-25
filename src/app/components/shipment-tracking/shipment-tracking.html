@@ -9,7 +9,6 @@
         placeholder="Search by Shipment ID"
         (input)="onSearch($event.target.value)"
       />
-      <!-- Announce the number of visible results to screen readers -->
       <div class="sr-only" aria-live="polite">Showing {{ filtered.length }} shipments</div>
     </div>
   </div>

@@ -1,13 +1,12 @@
 $delivered: #2ecc71;
 $transit: #3b82f6;
 $delayed: #ff6b6b;
-$placed: #8b5cf6; // indigo-ish for order placed
-$out: #f59e0b; // amber for out for delivery
+$placed: #8b5cf6;
+$out: #f59e0b;
 $card-bg: rgba(255, 255, 255, 0.9);
-$muted: #6b7280; // gray-500
+$muted: #6b7280;
 $glass: rgba(255, 255, 255, 0.6);
 
-/* Modern visual card with status icon, chips and stronger visual hierarchy */
 .card {
   background: #ffffff;
   border-radius: 14px;
@@ -17,7 +16,7 @@ $glass: rgba(255, 255, 255, 0.6);
   grid-template-columns: 1fr auto;
   gap: 0.8rem;
   align-items: start;
-  min-height: 260px; /* taller cards for premium spacing */
+  min-height: 260px;
   transition: transform 160ms ease, box-shadow 160ms ease;
   position: relative;
   overflow: hidden;
@@ -28,7 +27,6 @@ $glass: rgba(255, 255, 255, 0.6);
   }
 }
 
-/* Top-level timeline highlight rules (card is ancestor of .status-timeline) */
 .card.has-order-placed .status-timeline .step.order-placed .dot {
   background: linear-gradient(90deg, $placed, darken($placed, 6%));
   transform: scale(1.08);
@@ -94,8 +92,8 @@ $glass: rgba(255, 255, 255, 0.6);
 .card-main {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem; /* more vertical breathing room between header, chips and info */
-  justify-content: space-between; /* spread content vertically for taller cards */
+  gap: 1.1rem;
+  justify-content: space-between;
 }
 
 .card-header {
@@ -105,7 +103,7 @@ $glass: rgba(255, 255, 255, 0.6);
 
   h3 {
     margin: 0;
-    font-size: 1.18rem; /* slightly larger for emphasis */
+    font-size: 1.18rem;
     font-weight: 800;
     color: #0f172a;
     text-transform: uppercase;
@@ -178,24 +176,22 @@ $glass: rgba(255, 255, 255, 0.6);
 .meta-chips {
   display: flex;
   gap: 0.9rem;
-  /* Force both chips to stay on a single row and center them */
   flex-wrap: nowrap;
-  justify-content: center; /* center origin/destination in the middle */
-  margin: 0.9rem 0; /* add vertical breathing room above and below the chips */
+  justify-content: center;
+  margin: 0.9rem 0;
 
   .chip {
     background: rgba(15, 23, 42, 0.03);
-    padding: 0.6rem 1rem; /* bigger, more spacious chips */
+    padding: 0.6rem 1rem;
     border-radius: 8px;
-    font-size: 0.92rem; /* slightly larger text */
+    font-size: 0.92rem;
     color: #0f172a;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     border: 1px solid rgba(15, 23, 42, 0.03);
-    /* allow chips to share row space and truncate if text is long */
     flex: 0 1 48%;
-    min-width: 0; /* necessary to allow shrinking */
+    min-width: 0;
     max-width: 48%;
     white-space: nowrap;
     overflow: hidden;
@@ -210,7 +206,6 @@ $glass: rgba(255, 255, 255, 0.6);
     font-size: 0.85rem;
   }
 
-  /* subtle divider between chips to reduce clutter */
   .chip + .chip {
     border-left: 1px solid rgba(15, 23, 42, 0.06);
     padding-left: 0.9rem;
@@ -221,11 +216,12 @@ $glass: rgba(255, 255, 255, 0.6);
 .info {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.45rem; /* a bit more space for the estimated delivery line */
+  gap: 0.45rem;
+  margin-bottom: 14px;
 
   p {
     margin: 0;
-    font-size: 0.98rem; /* larger for readability */
+    font-size: 0.98rem;
     color: #0f172a;
     line-height: 1.35;
   }
@@ -245,7 +241,7 @@ $glass: rgba(255, 255, 255, 0.6);
 
   .progress-bar {
     flex: 1 1 auto;
-    height: 12px; /* slightly taller progress for visual weight */
+    height: 12px;
     background: #f0f2f5;
     border-radius: 999px;
     overflow: hidden;
@@ -269,19 +265,16 @@ $glass: rgba(255, 255, 255, 0.6);
   }
 }
 
-/* Status timeline (horizontal steps) */
 .status-timeline {
   width: 100%;
   display: block;
-  overflow: visible; /* allow dot box-shadow to render without being clipped */
-
+  overflow: visible;
   .timeline {
     display: flex;
     align-items: center;
-    gap: 0; /* connectors will provide spacing so set gap to 0 for continuous line */
+    gap: 0;
     width: 100%;
-    min-width: 0; /* permit children to shrink when space is tight */
-    /* allow visual effects (box-shadow) on dots to show fully — don't clip here */
+    min-width: 0;
   }
 
   .step {
@@ -289,12 +282,12 @@ $glass: rgba(255, 255, 255, 0.6);
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    min-width: 0; /* allow shrinking instead of forcing overflow */
-    flex: 0 1 auto; /* allow steps to shrink when space is tight */
+    min-width: 0;
+    flex: 0 1 auto;
     text-align: center;
     color: $muted;
     font-size: 0.72rem;
-    padding: 0 6px; /* slightly reduced horizontal padding to save space */
+    padding: 0 6px;
     box-sizing: border-box;
   }
 
@@ -302,15 +295,15 @@ $glass: rgba(255, 255, 255, 0.6);
     display: block;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* truncate long labels instead of growing */
-    max-width: 60px; /* slightly smaller to make room for connectors */
+    text-overflow: ellipsis;
+    max-width: 60px;
   }
 
   .dot {
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background: #f1f3f5; /* light circle behind the icon */
+    background: #f1f3f5;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -318,12 +311,12 @@ $glass: rgba(255, 255, 255, 0.6);
     flex: 0 0 auto;
     transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
     position: relative;
-    z-index: 2; /* sit above the connector so the line appears continuous */
+    z-index: 2;
   }
 
   .dot .icon {
     font-size: 14px;
-    color: #0f172a; /* default icon color (black-ish) */
+    color: #0f172a;
     line-height: 1;
     display: inline-block;
     transform-origin: center;
@@ -332,17 +325,16 @@ $glass: rgba(255, 255, 255, 0.6);
 
   .connector {
     flex: 1 1 auto;
-    height: 4px; /* slightly thicker so the connection is visible */
-    background: #e6e6e6 !important; /* ensure visible by default */
+    height: 4px;
+    background: #e6e6e6 !important;
     border-radius: 4px;
-    min-width: 20px; /* keep connectors visible on tight widths */
+    min-width: 20px;
     align-self: center;
-    margin: 0; /* keep connectors inline between padded steps */
+    margin: 0;
     z-index: 1;
     transition: background 220ms ease, opacity 220ms ease;
   }
 
-  /* active/filled states based on card's has-* class */
   .card.has-order-placed .step.order-placed .dot {
     background: linear-gradient(90deg, $placed, darken($placed, 6%));
     transform: scale(1.08);
@@ -421,7 +413,6 @@ $glass: rgba(255, 255, 255, 0.6);
     color: #ffffff;
   }
 
-  /* ensure labels have good contrast when active */
   .card.has-delivered .step .label,
   .card.has-out-for-delivery .step .label,
   .card.has-in-transit .step .label,
@@ -441,7 +432,6 @@ $glass: rgba(255, 255, 255, 0.6);
   min-width: 86px;
 }
 
-/* status accent on the left */
 .card::before {
   content: '';
   position: absolute;
@@ -516,9 +506,39 @@ $glass: rgba(255, 255, 255, 0.6);
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .card,
-  .fill {
-    transition: none !important;
+.status-timeline .label {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  max-width: 90px !important;
+  line-height: 1.2;
+  text-align: center;
+}
+
+@media (max-width: 880px) {
+  .card {
+    margin: 0 12px !important;
+  }
+
+  .meta-chips {
+    justify-content: flex-start !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100%;
+  }
+
+  .meta-chips .chip {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    padding: 12px !important;
+  }
+
+  .meta-chips .chip + .chip {
+    border-left: none !important;
+    margin-left: 0 !important;
+    padding-left: 12px !important;
   }
 }
