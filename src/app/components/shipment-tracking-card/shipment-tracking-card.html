@@ -1,0 +1,72 @@
+<article
+  class="card"
+  [ngClass]="{
+    'has-delivered': shipment.status === 'Delivered',
+    'has-in-transit': shipment.status === 'In Transit',
+    'has-delayed': shipment.status === 'Delayed',
+    'has-out-for-delivery': shipment.status === 'Out for Delivery',
+    'has-order-placed': shipment.status === 'Order Placed'
+  }"
+  aria-labelledby="shipment-{{ shipment.shipmentId }}"
+>
+  <div class="card-main">
+    <header class="card-header">
+      <h3 id="shipment-{{ shipment.shipmentId }}">#{{ shipment.shipmentId }}</h3>
+      <span class="status" [ngClass]="statusClass(shipment.status)">
+        {{ shipment.status }}
+      </span>
+    </header>
+
+    <div class="meta-chips">
+      <div class="chip">
+        <strong>Ship From</strong> {{ shipment.origin?.city
+        }}{{ shipment.origin?.state ? ', ' + shipment.origin.state : '' }}
+      </div>
+      <div class="chip">
+        <strong>Ship To</strong> {{ shipment.destination?.city
+        }}{{ shipment.destination?.state ? ', ' + shipment.destination.state : '' }}
+      </div>
+    </div>
+
+    <section class="info" aria-live="polite">
+      <p><strong>Estimated Delivery:</strong> {{ shipment.estimatedDelivery }}</p>
+    </section>
+  </div>
+
+  <footer class="progress">
+    <div class="status-timeline" aria-hidden="true">
+      <div class="timeline">
+        <div class="step order-placed">
+          <span class="dot"><span class="icon" aria-hidden="true">📦</span></span>
+          <span class="label">Order placed</span>
+        </div>
+
+        <div class="connector connector-1"></div>
+
+        <div class="step in-transit">
+          <span class="dot"><span class="icon" aria-hidden="true">🚚</span></span>
+          <span class="label">In Transit</span>
+        </div>
+
+        <div class="connector connector-2"></div>
+
+        <div *ngIf="shipment.status === 'Delayed'" class="step delayed">
+          <span class="dot"><span class="icon" aria-hidden="true">⚠️</span></span>
+          <span class="label">Delayed</span>
+        </div>
+
+        <div *ngIf="shipment.status !== 'Delayed'" class="step out-for-delivery">
+          <span class="dot"><span class="icon" aria-hidden="true">🛵</span></span>
+          <span class="label">Out for Delivery</span>
+        </div>
+
+        <div class="connector connector-3"></div>
+
+        <div class="step delivered">
+          <span class="dot"><span class="icon" aria-hidden="true">✔️</span></span>
+          <span class="label">Delivered</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+</article>
