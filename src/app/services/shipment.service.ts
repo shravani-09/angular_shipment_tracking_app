@@ -13,6 +13,6 @@ export class ShipmentService {
   }
 
   getShipmentById(id: string): Shipment | undefined {
-    return SHIPMENT_MOCK_DATA.find((s) => (s as any).shipmentId === id || (s as any).id === id);
+    return SHIPMENT_MOCK_DATA.find((s) => s.shipmentId === id);
   }
 }

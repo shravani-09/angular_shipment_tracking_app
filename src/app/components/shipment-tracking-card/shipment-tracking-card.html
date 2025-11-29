@@ -11,7 +11,7 @@
 >
   <div class="card-main">
     <header class="card-header">
-      <h3 id="shipment-{{ shipment.shipmentId }}">#{{ shipment.shipmentId }}</h3>
+      <h3 [id]="'shipment-' + shipment.shipmentId">#{{ shipment.shipmentId }}</h3>
       <span class="status" [ngClass]="statusClass(shipment.status)">
         {{ shipment.status }}
       </span>
@@ -20,11 +20,11 @@
     <div class="meta-chips">
       <div class="chip">
         <strong>Ship From</strong> {{ shipment.origin.city
-        }}{{ shipment.origin?.state ? ', ' + shipment.origin.state : '' }}
+        }}{{ shipment.origin.state ? ', ' + shipment.origin.state : '' }}
       </div>
       <div class="chip">
-        <strong>Ship To</strong> {{ shipment.destination?.city
-        }}{{ shipment.destination?.state ? ', ' + shipment.destination.state : '' }}
+        <strong>Ship To</strong> {{ shipment.destination.city
+        }}{{ shipment.destination.state ? ', ' + shipment.destination.state : '' }}
       </div>
     </div>
 

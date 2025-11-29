@@ -7,6 +7,12 @@ $card-bg: rgba(255, 255, 255, 0.9);
 $muted: #6b7280;
 $glass: rgba(255, 255, 255, 0.6);
 
+@mixin dot-active($color, $scale: 1.08, $shadowOpacity: 0.06) {
+  background: linear-gradient(90deg, $color, darken($color, 6%));
+  transform: scale($scale);
+  box-shadow: 0 0 0 6px rgba($color, $shadowOpacity);
+}
+
 .card {
   background: #ffffff;
   border-radius: 14px;
@@ -25,68 +31,70 @@ $glass: rgba(255, 255, 255, 0.6);
     transform: translateY(-8px);
     box-shadow: 0 26px 60px rgba(15, 23, 42, 0.1);
   }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02));
+  }
+
+  &.has-delivered::before {
+    background: linear-gradient(180deg, $delivered, darken($delivered, 6%));
+  }
+  &.has-in-transit::before {
+    background: linear-gradient(180deg, $transit, darken($transit, 6%));
+  }
+  &.has-delayed::before {
+    background: linear-gradient(180deg, $delayed, darken($delayed, 6%));
+  }
+  &.has-out-for-delivery::before {
+    background: linear-gradient(180deg, $out, darken($out, 6%));
+  }
+  &.has-order-placed::before {
+    background: linear-gradient(180deg, $placed, darken($placed, 6%));
+  }
 }
 
-.card.has-order-placed .status-timeline .step.order-placed .dot {
-  background: linear-gradient(90deg, $placed, darken($placed, 6%));
-  transform: scale(1.08);
-  box-shadow: 0 0 0 6px rgba($placed, 0.06);
+$statuses: (
+  'order-placed': $placed,
+  'in-transit': $transit,
+  'out-for-delivery': $out,
+  'delayed': $delayed,
+  'delivered': $delivered,
+);
+
+@each $key, $color in $statuses {
+  .card.has-#{$key} {
+    .status-timeline {
+      .step.#{$key} .dot {
+        @include dot-active($color);
+      }
+
+      .step.#{$key} .dot .icon {
+        color: #ffffff;
+      }
+    }
+  }
 }
 
-.card.has-order-placed .status-timeline .step.order-placed .dot .icon {
-  color: #ffffff;
-  transform: scale(1.02);
-}
-
-.card.has-in-transit .status-timeline .step.in-transit .dot {
-  background: linear-gradient(90deg, $transit, darken($transit, 6%));
-  transform: scale(1.12);
-  box-shadow: 0 0 0 6px rgba($transit, 0.08);
-}
-.card.has-in-transit .status-timeline .connector.connector-1 {
+.card.has-in-transit .connector.connector-1 {
   background: var(--accent);
 }
-
-.card.has-in-transit .status-timeline .step.in-transit .dot .icon {
-  color: #ffffff;
-}
-
-.card.has-out-for-delivery .status-timeline .step.out-for-delivery .dot {
-  background: linear-gradient(90deg, $out, darken($out, 6%));
-  transform: scale(1.08);
-  box-shadow: 0 0 0 6px rgba($out, 0.07);
-}
-.card.has-out-for-delivery .status-timeline .connector.connector-1,
-.card.has-out-for-delivery .status-timeline .connector.connector-2 {
+.card.has-out-for-delivery .connector-1,
+.card.has-out-for-delivery .connector-2 {
   background: var(--accent);
 }
-
-.card.has-delayed .status-timeline .step.delayed .dot {
-  background: linear-gradient(90deg, $delayed, darken($delayed, 6%));
-  transform: scale(1.08);
-  box-shadow: 0 0 0 6px rgba($delayed, 0.08);
-}
-.card.has-delayed .status-timeline .connector.connector-1 {
+.card.has-delayed .connector.connector-1 {
   background: var(--accent);
 }
-
-.card.has-delayed .status-timeline .step.delayed .dot .icon {
-  color: #ffffff;
-}
-
-.card.has-delivered .status-timeline .step.delivered .dot {
-  background: linear-gradient(90deg, $delivered, darken($delivered, 6%));
-  transform: scale(1.08);
-  box-shadow: 0 0 0 6px rgba($delivered, 0.08);
-}
-.card.has-delivered .status-timeline .connector.connector-1,
-.card.has-delivered .status-timeline .connector.connector-2,
-.card.has-delivered .status-timeline .connector.connector-3 {
+.card.has-delivered .connector-1,
+.card.has-delivered .connector-2,
+.card.has-delivered .connector-3 {
   background: var(--accent);
-}
-
-.card.has-delivered .status-timeline .step.delivered .dot .icon {
-  color: #ffffff;
 }
 
 .card-main {
@@ -120,56 +128,47 @@ $glass: rgba(255, 255, 255, 0.6);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-  }
 
-  .status::before {
-    content: '';
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.12);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  }
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
 
-  .delivered {
-    background: linear-gradient(90deg, $delivered, darken($delivered, 6%));
-  }
-  .delivered::before {
-    content: '✓';
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.95);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .in-transit {
-    background: linear-gradient(90deg, $transit, darken($transit, 6%));
-  }
-  .in-transit::before {
-    content: '🚚';
-  }
-
-  .out-for-delivery {
-    background: linear-gradient(90deg, $out, darken($out, 6%));
-  }
-  .out-for-delivery::before {
-    content: '🚛';
-  }
-
-  .delayed {
-    background: linear-gradient(90deg, $delayed, darken($delayed, 6%));
-  }
-  .delayed::before {
-    content: '⏳';
-  }
-
-  .order-placed {
-    background: linear-gradient(90deg, $placed, darken($placed, 6%));
-  }
-  .order-placed::before {
-    content: '🛒';
+    &.delivered {
+      background: linear-gradient(90deg, $delivered, darken($delivered, 6%));
+      &::before {
+        content: '✓';
+      }
+    }
+    &.in-transit {
+      background: linear-gradient(90deg, $transit, darken($transit, 6%));
+      &::before {
+        content: '🚚';
+      }
+    }
+    &.out-for-delivery {
+      background: linear-gradient(90deg, $out, darken($out, 6%));
+      &::before {
+        content: '🚛';
+      }
+    }
+    &.delayed {
+      background: linear-gradient(90deg, $delayed, darken($delayed, 6%));
+      &::before {
+        content: '⏳';
+      }
+    }
+    &.order-placed {
+      background: linear-gradient(90deg, $placed, darken($placed, 6%));
+      &::before {
+        content: '🛒';
+      }
+    }
   }
 }
 
@@ -191,31 +190,28 @@ $glass: rgba(255, 255, 255, 0.6);
     gap: 0.5rem;
     border: 1px solid rgba(15, 23, 42, 0.03);
     flex: 0 1 48%;
-    min-width: 0;
-    max-width: 48%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     justify-content: center;
-  }
 
-  .chip strong {
-    font-weight: 700;
-    color: $muted;
-    margin-right: 0.35rem;
-    font-size: 0.85rem;
-  }
+    strong {
+      font-weight: 700;
+      color: $muted;
+      margin-right: 0.35rem;
+      font-size: 0.85rem;
+    }
 
-  .chip + .chip {
-    border-left: 1px solid rgba(15, 23, 42, 0.06);
-    padding-left: 0.9rem;
-    margin-left: 0.4rem;
+    + .chip {
+      border-left: 1px solid rgba(15, 23, 42, 0.06);
+      padding-left: 0.9rem;
+      margin-left: 0.4rem;
+    }
   }
 }
 
 .info {
   display: grid;
-  grid-template-columns: 1fr;
   gap: 0.45rem;
   margin-bottom: 14px;
 
@@ -223,7 +219,6 @@ $glass: rgba(255, 255, 255, 0.6);
     margin: 0;
     font-size: 0.98rem;
     color: #0f172a;
-    line-height: 1.35;
   }
 
   strong {
@@ -240,230 +235,84 @@ $glass: rgba(255, 255, 255, 0.6);
   grid-column: 1 / -1;
 
   .progress-bar {
-    flex: 1 1 auto;
+    flex: 1;
     height: 12px;
     background: #f0f2f5;
     border-radius: 999px;
     overflow: hidden;
-    position: relative;
-  }
 
-  .fill {
-    height: 100%;
-    width: 0%;
-    transition: width 520ms cubic-bezier(0.22, 0.9, 0.3, 1);
-    background: var(--accent);
-    box-shadow: none;
+    .fill {
+      height: 100%;
+      width: 0%;
+      transition: width 520ms cubic-bezier(0.22, 0.9, 0.3, 1);
+      background: var(--accent);
+    }
   }
 
   .percentage {
-    margin: 0;
     font-size: 0.88rem;
     color: $muted;
-    min-width: 74px;
     text-align: right;
   }
 }
 
 .status-timeline {
   width: 100%;
-  display: block;
-  overflow: visible;
+
   .timeline {
     display: flex;
     align-items: center;
-    gap: 0;
-    width: 100%;
-    min-width: 0;
   }
 
   .step {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    min-width: 0;
-    flex: 0 1 auto;
-    text-align: center;
-    color: $muted;
     font-size: 0.72rem;
-    padding: 0 6px;
-    box-sizing: border-box;
-  }
+    color: $muted;
 
-  .label {
-    display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 60px;
-  }
+    .label {
+      max-width: 60px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-  .dot {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #f1f3f5;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #ffffff;
-    flex: 0 0 auto;
-    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
-    position: relative;
-    z-index: 2;
-  }
+    .dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f1f3f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #fff;
 
-  .dot .icon {
-    font-size: 14px;
-    color: #0f172a;
-    line-height: 1;
-    display: inline-block;
-    transform-origin: center;
-    transition: color 180ms ease, transform 180ms ease, text-shadow 180ms ease;
+      .icon {
+        font-size: 14px;
+        color: #0f172a;
+      }
+    }
   }
 
   .connector {
-    flex: 1 1 auto;
+    flex: 1;
     height: 4px;
     background: #e6e6e6 !important;
     border-radius: 4px;
-    min-width: 20px;
-    align-self: center;
-    margin: 0;
-    z-index: 1;
-    transition: background 220ms ease, opacity 220ms ease;
-  }
-
-  .card.has-order-placed .step.order-placed .dot {
-    background: linear-gradient(90deg, $placed, darken($placed, 6%));
-    transform: scale(1.08);
-    box-shadow: 0 0 0 6px rgba($placed, 0.06);
-  }
-
-  .card.has-order-placed .step.order-placed .dot .icon {
-    color: #ffffff;
-    transform: scale(1.02);
-  }
-
-  .card.has-in-transit .step.order-placed .dot {
-    background: var(--accent);
-  }
-  .card.has-in-transit .step.in-transit .dot {
-    background: linear-gradient(90deg, $transit, darken($transit, 6%));
-    transform: scale(1.12);
-    box-shadow: 0 0 0 6px rgba($transit, 0.08);
-  }
-  .card.has-in-transit .connector.connector-1 {
-    background: var(--accent);
-  }
-
-  .card.has-in-transit .step.in-transit .dot .icon {
-    color: #ffffff;
-  }
-
-  .card.has-out-for-delivery .step.order-placed .dot,
-  .card.has-out-for-delivery .step.in-transit .dot {
-    background: var(--accent);
-  }
-  .card.has-out-for-delivery .step.out-for-delivery .dot {
-    background: linear-gradient(90deg, $out, darken($out, 6%));
-    transform: scale(1.08);
-    box-shadow: 0 0 0 6px rgba($out, 0.07);
-  }
-  .card.has-out-for-delivery .connector.connector-1,
-  .card.has-out-for-delivery .connector.connector-2 {
-    background: var(--accent);
-  }
-
-  .card.has-delayed .step.order-placed .dot,
-  .card.has-delayed .step.in-transit .dot {
-    background: var(--accent);
-  }
-  .card.has-delayed .step.delayed .dot {
-    background: linear-gradient(90deg, $delayed, darken($delayed, 6%));
-    transform: scale(1.08);
-    box-shadow: 0 0 0 6px rgba($delayed, 0.08);
-  }
-  .card.has-delayed .connector.connector-1 {
-    background: var(--accent);
-  }
-
-  .card.has-delayed .step.delayed .dot .icon {
-    color: #ffffff;
-  }
-
-  .card.has-delivered .step.order-placed .dot,
-  .card.has-delivered .step.in-transit .dot,
-  .card.has-delivered .step.out-for-delivery .dot {
-    background: var(--accent);
-  }
-  .card.has-delivered .step.delivered .dot {
-    background: linear-gradient(90deg, $delivered, darken($delivered, 6%));
-    transform: scale(1.08);
-    box-shadow: 0 0 0 6px rgba($delivered, 0.08);
-  }
-  .card.has-delivered .connector.connector-1,
-  .card.has-delivered .connector.connector-2,
-  .card.has-delivered .connector.connector-3 {
-    background: var(--accent);
-  }
-
-  .card.has-delivered .step.delivered .dot .icon {
-    color: #ffffff;
-  }
-
-  .card.has-delivered .step .label,
-  .card.has-out-for-delivery .step .label,
-  .card.has-in-transit .step .label,
-  .card.has-order-placed .step .label {
-    color: #0f172a;
-    font-weight: 600;
-    font-size: 0.72rem;
   }
 }
 
-.card-side {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-  min-width: 86px;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 8px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02));
-}
-.card.has-delivered::before {
-  background: linear-gradient(180deg, $delivered, darken($delivered, 6%));
-}
-.card.has-in-transit::before {
-  background: linear-gradient(180deg, $transit, darken($transit, 6%));
-}
-.card.has-delayed::before {
-  background: linear-gradient(180deg, $delayed, darken($delayed, 6%));
-}
-.card.has-out-for-delivery::before {
-  background: linear-gradient(180deg, $out, darken($out, 6%));
-}
-.card.has-order-placed::before {
-  background: linear-gradient(180deg, $placed, darken($placed, 6%));
-}
-
+/* --------------------------------------------------
+   RESPONSIVE
+-------------------------------------------------- */
 @media (max-width: 760px) {
   .card {
     grid-template-columns: 1fr;
   }
+
   .card-side {
     flex-direction: row;
-    gap: 0.5rem;
   }
 }
 
@@ -473,72 +322,29 @@ $glass: rgba(255, 255, 255, 0.6);
     padding: 1rem;
     min-height: 200px;
     border-radius: 12px;
-  }
-
-  .card-header {
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 0.5rem;
+    margin: 0 12px !important;
   }
 
   .meta-chips {
-    flex-wrap: wrap !important;
-    gap: 0.6rem;
-    margin: 0.6rem 0;
-    justify-content: center;
-  }
+    flex-direction: column !important;
+    width: 100%;
+    gap: 8px !important;
 
-  .meta-chips .chip {
-    flex: 1 1 100% !important;
-    max-width: 100% !important;
-    text-align: center;
-    padding: 0.45rem 0.75rem;
-  }
+    .chip {
+      width: 100% !important;
+      padding: 12px !important;
+      justify-content: flex-start !important;
 
-  .status {
-    font-size: 0.78rem;
-    padding: 0.36rem 0.6rem;
+      + .chip {
+        border-left: none !important;
+        margin-left: 0 !important;
+        padding-left: 12px !important;
+      }
+    }
   }
 
   .status-timeline .label {
     max-width: 48px;
     font-size: 0.66rem;
-  }
-}
-
-.status-timeline .label {
-  white-space: normal !important;
-  overflow: visible !important;
-  text-overflow: unset !important;
-  max-width: 90px !important;
-  line-height: 1.2;
-  text-align: center;
-}
-
-@media (max-width: 880px) {
-  .card {
-    margin: 0 12px !important;
-  }
-
-  .meta-chips {
-    justify-content: flex-start !important;
-    flex-direction: column !important;
-    gap: 8px !important;
-    width: 100%;
-  }
-
-  .meta-chips .chip {
-    width: 100% !important;
-    max-width: 100% !important;
-    flex: none !important;
-    justify-content: flex-start !important;
-    text-align: left !important;
-    padding: 12px !important;
-  }
-
-  .meta-chips .chip + .chip {
-    border-left: none !important;
-    margin-left: 0 !important;
-    padding-left: 12px !important;
   }
 }

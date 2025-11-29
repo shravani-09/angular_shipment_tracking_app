@@ -30,7 +30,7 @@ export class ShipmentTrackingComponent implements OnInit {
     }
 
     this.filtered = this.shipments.filter((s) => {
-      const id = ((s as any).shipmentId || (s as any).id || '').toString().toLowerCase();
+      const id = s.shipmentId.toLowerCase();
       return id.includes(q);
     });
   }
