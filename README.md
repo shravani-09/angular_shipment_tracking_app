@@ -1,7 +1,7 @@
 # 📦 Shipment Tracking App (Angular)
 
 A clean, modular **Shipment Tracking Application** built using **Angular**, **TypeScript**, and **SCSS**.
-This project was developed as part of a coding assessment and demonstrates clean architecture, reusable components, responsive UI, and good coding practices.
+This project was developed as part of a coding assessment and demonstrates architecture, reusable components, responsive UI, and coding practices.
 
 ---
 
