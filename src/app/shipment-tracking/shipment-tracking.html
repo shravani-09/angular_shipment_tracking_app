@@ -1,0 +1,21 @@
+<section class="tracking" aria-labelledby="tracking-heading">
+  <div class="tracking-container">
+    <h2 class="sr-only tracking-heading">Shipment Tracking</h2>
+
+    <div class="search-container">
+      <app-shipment-tracking-search (search)="onSearch($event)"></app-shipment-tracking-search>
+      <div class="sr-only" aria-live="polite">Showing {{ filtered.length }} shipments</div>
+    </div>
+
+    <div class="cards" *ngIf="filtered.length; else empty">
+      <app-shipment-card
+        *ngFor="let filteredData of filtered"
+        [shipment]="filteredData"
+      ></app-shipment-card>
+    </div>
+
+    <ng-template #empty>
+      <p class="no-results">No shipments found.</p>
+    </ng-template>
+  </div>
+</section>

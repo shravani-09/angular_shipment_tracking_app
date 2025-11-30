@@ -1,0 +1,55 @@
+.tracking {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+
+  .tracking-container {
+    width: 100%;
+    max-width: 1280px;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+
+    .tracking-heading {
+      text-align: center;
+    }
+  }
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+
+    app-shipment-tracking-search {
+      flex: 0 0 60%;
+    }
+
+    .tracking-heading {
+      flex: 0 0 20%;
+    }
+  }
+
+  .cards {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(360px, 1fr));
+  }
+
+  @media (max-width: 760px) {
+    .cards {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      width: 100%;
+    }
+  }
+
+  .no-results {
+    color: #666;
+    margin: 0.5rem 0;
+  }
+}

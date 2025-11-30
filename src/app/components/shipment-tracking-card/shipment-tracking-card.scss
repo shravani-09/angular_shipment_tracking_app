@@ -233,27 +233,6 @@ $statuses: (
   align-items: center;
   gap: 0.75rem;
   grid-column: 1 / -1;
-
-  .progress-bar {
-    flex: 1;
-    height: 12px;
-    background: #f0f2f5;
-    border-radius: 999px;
-    overflow: hidden;
-
-    .fill {
-      height: 100%;
-      width: 0%;
-      transition: width 520ms cubic-bezier(0.22, 0.9, 0.3, 1);
-      background: var(--accent);
-    }
-  }
-
-  .percentage {
-    font-size: 0.88rem;
-    color: $muted;
-    text-align: right;
-  }
 }
 
 .status-timeline {
@@ -272,10 +251,9 @@ $statuses: (
     color: $muted;
 
     .label {
-      max-width: 60px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      max-width: 90px;
+      white-space: normal;
+      text-align: center;
     }
 
     .dot {
@@ -287,6 +265,7 @@ $statuses: (
       align-items: center;
       justify-content: center;
       border: 2px solid #fff;
+      margin: 9px;
 
       .icon {
         font-size: 14px;
@@ -303,20 +282,13 @@ $statuses: (
   }
 }
 
-/* --------------------------------------------------
-   RESPONSIVE
--------------------------------------------------- */
 @media (max-width: 760px) {
   .card {
     grid-template-columns: 1fr;
   }
-
-  .card-side {
-    flex-direction: row;
-  }
 }
 
-@media (max-width: 880px) {
+@media (max-width: 1024px) {
   .card {
     grid-template-columns: 1fr !important;
     padding: 1rem;
@@ -331,7 +303,6 @@ $statuses: (
     gap: 8px !important;
 
     .chip {
-      width: 100% !important;
       padding: 12px !important;
       justify-content: flex-start !important;
 

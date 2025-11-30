@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShipmentTrackingComponent } from './components/shipment-tracking/shipment-tracking';
+import { ShipmentTrackingComponent } from './shipment-tracking/shipment-tracking';
 
 @Component({
   selector: 'app-root',

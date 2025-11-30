@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ShipmentCardComponent } from '../shipment-tracking-card/shipment-tracking-card';
-import { Shipment } from '../../models/shipment.model';
-import { ShipmentService } from '../../services/shipment.service';
+import { Shipment } from '../models/shipment.model';
+import { ShipmentService } from '../services/shipment.service';
 import { CommonModule } from '@angular/common';
+import { ShipmentCardComponent } from '../components/shipment-tracking-card/shipment-tracking-card';
+import { ShipmentTrackingSearch } from '../components/shipment-tracking-search/shipment-tracking-search';
 
 @Component({
   selector: 'app-shipment-tracking',
   standalone: true,
-  imports: [CommonModule, ShipmentCardComponent],
+  imports: [CommonModule, ShipmentCardComponent, ShipmentTrackingSearch],
   templateUrl: './shipment-tracking.html',
   styleUrls: ['./shipment-tracking.scss'],
 })

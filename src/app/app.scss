@@ -20,37 +20,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-main {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 16px;
-  box-sizing: border-box;
-}
-
-h1 {
-  text-align: center;
-  margin: 0 0 1rem 0;
-  font-size: 1.6rem;
-  color: #0f172a;
-  font-weight: 800;
-  letter-spacing: -0.4px;
-}
-
-.tracking-shell {
-  width: 100%;
-  max-width: 1400px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.7));
-  border-radius: 20px;
-  padding: 1.5rem;
-  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.06);
-}
-
-body {
-  background: linear-gradient(180deg, #fafcfe, #f8faff);
-}
-
 .sr-only {
   position: absolute !important;
   width: 1px;
@@ -60,12 +29,4 @@ body {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-}
-
-.hero-title {
-  font-size: 2.05rem;
-  font-weight: 800;
-  text-align: center;
-  margin: 0 0 1rem 0;
-  color: #0f172a;
 }
