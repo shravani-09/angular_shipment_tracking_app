@@ -1,60 +1,129 @@
-# ShipmentTrackingApplication
+# 📦 Shipment Tracking App (Angular)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+A clean, modular **Shipment Tracking Application** built using **Angular**, **TypeScript**, and **SCSS**.
+This project was developed as part of a coding assessment and demonstrates clean architecture, reusable components, responsive UI, and good coding practices.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🌐 Live Demo
 
-```bash
+The application is deployed on Netlify:
+
+👉 **[https://shipmentapp.netlify.app/](https://shipmentapp.netlify.app/)**
+
+Use the live URL to view:
+
+* Shipment card rendering
+* Status-based colors
+* Responsive layouts
+* Search functionality
+
+---
+
+## 🚀 Features
+
+* 🔍 **Search** shipments by tracking number
+* 🃏 **Shipment Cards** showing ID, status, origin, destination & dates
+* 🎨 **Status-based color indicators**
+* 📱 **Fully responsive layout** using pure SCSS
+* ♿ **Accessible** and semantic HTML structure
+* 🧩 **Reusable component-based architecture**
+
+---
+
+## 🏗️ Project Architecture
+
+```
+src/
+ ├── app/
+ │    ├── components/
+ │    │      ├── search-box/         # Search input component
+ │    │      ├── shipment-card/      # UI card for individual shipment
+ │    │      └── shipment-list/      # Renders list of shipment cards
+ │    │
+ │    ├── services/
+ │    │      └── shipment.service.ts # Mock data + filtering business logic
+ │    │
+ │    ├── models/
+ │    │      └── shipment.model.ts   # TypeScript interfaces
+ │    │
+ │    ├── pages/
+ │    │      └── tracking/           # Main shipment tracking page
+ │    │
+ │    ├── app.component.ts
+ │    └── app.module.ts
+ │
+ ├── styles/
+ │     └── globals.scss              # Variables, mixins, typography, layout
+ │
+ ├── assets/
+ └── environments/
+```
+
+### ✔ Architecture Principles Followed
+
+* **Feature-based organization**
+* **Loose coupling via reusable standalone components**
+* **Services handle data operations**
+* **Models ensure TypeScript safety**
+* **SCSS modularization** (variables, mixins, nesting, breakpoints)
+* **Unidirectional data flow** via inputs & event emitters
+* **Accessibility-first HTML**
+
+---
+
+## 🤖 AI-Assisted Development (Transparent Usage)
+
+I used AI strictly to **improve productivity**, not to generate the project.
+
+### AI Helped With:
+
+#### 4️⃣ Code Review Suggestions
+
+Suggestions such as:
+
+* Naming conventions
+* Refactoring repeated SCSS patterns
+* Improving readability
+
+---
+
+## 🏃‍♀️ Running the Project
+
+### Install dependencies
+
+```sh
+npm install
+```
+
+### Run the development server
+
+```sh
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Runs at → **[http://localhost:4200](http://localhost:4200)**
 
-## Code scaffolding
+### Build for production
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
+```sh
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Run unit tests (if applicable)
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
+```sh
 ng test
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🛠️ Tech Stack
 
-```bash
-ng e2e
-```
+* **Angular 17+**
+* **TypeScript**
+* **SCSS (responsive + modular)**
+* **RxJS**
+* **HTML5 + Accessibility principles**
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# angular_shipment_tracking_app
+---
