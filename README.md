@@ -74,7 +74,7 @@ src/
 
 ## 🤖 AI-Assisted Development (Transparent Usage)
 
-I used AI strictly to **improve productivity**, not to generate the project.
+I used AI strictly to **improve productivity**
 
 ### AI Helped With:
 
