@@ -66,7 +66,7 @@ src/
 * **Loose coupling via reusable standalone components**
 * **Services handle data operations**
 * **Models ensure TypeScript safety**
-* **SCSS modularization** (variables, mixins, nesting, breakpoints)
+* **SCSS modularization** 
 * **Unidirectional data flow** via inputs & event emitters
 * **Accessibility-first HTML**
 
