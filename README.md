@@ -54,7 +54,7 @@ src/
  │    └── app.module.ts
  │
  ├── styles/
- │     └── globals.scss              # Variables, mixins, typography, layout
+ │     └── globals.scss              # Variables, layout
  │
  ├── assets/
  └── environments/
